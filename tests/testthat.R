@@ -1,0 +1,5 @@
+library(testthat)
+library(checkmate)
+library(mlrngLearners)
+options(mlrng.verbose = FALSE)
+test_check("mlrngLearners")

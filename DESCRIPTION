@@ -6,19 +6,23 @@ Date: 2017-10-06
 Author: Giuseppe Casalicchio, Stefan Coors
 Maintainer: <giuseppe.casalicchio@stat.uni-muenchen.de>
 Description: Cool learners.
-License: What license is it under?
+License: GPL-2
 RoxygenNote: 6.0.1
 Depends:
     R (>= 3.2.0),
     mlrng,
     ParamHelpers
+Imports:
+    backports (>= 1.1.1),
+    checkmate (>= 1.8.4),
+Suggests:
+    testthat
 Collate: 
     'mlr.learners.classif.ksvm.R'
     'mlr.learners.classif.naiveBayes.R'
     'mlr.learners.classif.ranger.R'
     'mlr.learners.classif.rpart.R'
     'mlr.learners.classif.xgboost.R'
-    'mlr.learners.helper.R'
     'mlr.learners.regr.lm.R'
     'mlr.learners.regr.ranger.R'
     'mlr.learners.regr.rpart.R'

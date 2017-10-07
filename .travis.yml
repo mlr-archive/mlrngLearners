@@ -1,0 +1,18 @@
+dist: trusty
+sudo: false
+language: r
+cache: packages
+
+env:
+  global:
+    - _R_CHECK_TESTS_NLINES_=999
+
+r_github_packages:
+  - mlr-org/mlrng
+  - smilesun/ParamHelpers2
+
+r:
+  - 3.2
+  - 3.3
+  - 3.4
+  - devel
