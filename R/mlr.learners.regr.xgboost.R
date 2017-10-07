@@ -1,5 +1,3 @@
-#' @include Dictionaries.R
-
 mlr.learners$add(LearnerRegr$new(
   name = "xgboost",
   package = "xgboost",
@@ -50,31 +48,31 @@ mlr.learners$add(LearnerRegr$new(
   ),
   par.vals = list(nrounds = 1L, verbose = 0L),
   properties = c("feat.numeric", "weights", "featimp", "missings"),
-  
+
   train = function(task, subset, weights = NULL, ...) {
     parlist = list(...)
-    
+
     if (is.null(parlist$objective))
       parlist$objective = "reg:linear"
-    
+
     data = getTaskData(task, subset = subset, type = "train", props = self$properties)
     d = BBmisc::dropNamed(data, drop = task$target)
     truth = task$truth()
     parlist$data = xgboost::xgb.DMatrix(data = data.matrix(d), label = data.matrix(truth))
-    
+
     if (!is.null(weights))
       xgboost::setinfo(parlist$data, "weight", weights)
-    
+
     if (is.null(parlist$watchlist))
       parlist$watchlist = list(train = parlist$data)
-    
+
     do.call(xgboost::xgb.train, parlist)
   },
-  
+
   predict = function(model, newdata, ...) {
     predict(model$rmodel, newdata = data.matrix(newdata), ...)
   },
-  
+
   model.extractors = list(
     featureImportance = function(model, task, subset, ...) {
       mod = model$rmodel

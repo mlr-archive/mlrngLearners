@@ -1,5 +1,3 @@
-#' @include Dictionaries.R
-
 mlr.learners$add(LearnerClassif$new(
   name = "naiveBayes",
   package = "e1071",

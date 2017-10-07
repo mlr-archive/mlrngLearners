@@ -1,5 +1,3 @@
-#' @include Dictionaries.R
-
 mlr.learners$add(LearnerClassif$new(
   name = "ranger",
   package = "ranger",
@@ -25,7 +23,7 @@ mlr.learners$add(LearnerClassif$new(
   ),
   par.vals = list(num.threads = 1L, verbose = FALSE, respect.unordered.factors = TRUE),
   properties = c("twoclass", "multiclass", "prob", "feat.numeric", "feat.factor", "feat.ordered", "featimp", "weights", "parallel", "formula"),
-  
+
   train = function(task, subset, weights = NULL, ...) {
     tn = task$target
     data = getTaskData(task, subset = subset, type = "train", target.as = "factor", props = self$properties)
@@ -43,7 +41,7 @@ mlr.learners$add(LearnerClassif$new(
       return(p$predictions)
     }
   },
-  
+
   model.extractors = list( # FIXME: not working right now
     OOBPredictions = function(model, task = NULL, subset = NULL, ...) {
       model$predictions
