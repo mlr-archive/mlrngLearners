@@ -1,8 +1,10 @@
 mlr.learners$add(LearnerClassif$new(
   name = "naiveBayes",
   package = "e1071",
-  par.set = makeParamSet(
-    makeNumericLearnerParam(id = "laplace", default = 0, lower = 0)
+  par.set = ParamSetFlat$new(
+    params = list(
+      ParamReal$new(id = "laplace", default = 0, lower = 0)
+    )
   ),
   par.vals = list(),
   properties = c("twoclass", "multiclass", "missings", "feat.numeric", "feat.factor", "prob"),
