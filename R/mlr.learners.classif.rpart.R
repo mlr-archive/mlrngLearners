@@ -2,7 +2,6 @@ mlr.learners$add(LearnerClassif$new(
   name = "rpart",
   package = "rpart",
   par.set = ParamSetFlat$new(
-    id = 'rpart.par.set',
     params = list(
       ParamInt$new(id = "minsplit", default = 20L, lower = 1L),
       ParamReal$new(id = "cp", default = 0.01, lower = 0, upper = 1),
