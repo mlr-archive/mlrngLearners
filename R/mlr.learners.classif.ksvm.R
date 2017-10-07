@@ -24,14 +24,14 @@ mlr.learners$add(
         ParamInt$new(id = "cache", default = 40L, lower = 1L)
       ),
       restriction = quote(
-        is.na(C) & !(type %in% c("C-svc", "C-bsvc", "spoc-svc", "kbb-svc")) &
-        is.na(nu) & type != "nu-svc" &
-        is.na(epsilon) & !(type %in% c("eps-svr", "nu-svr", "eps-bsvm")) &
-        is.na(sigma) & !(kernel %in% c("rbfdot", "anovadot", "besseldot", "laplacedot")) &
-        is.na(degree) & !(kernel %in% c("polydot", "anovadot", "besseldot")) &
-        is.na(scale) & !(kernel %in% c("polydot", "tanhdot")) &
-        is.na(offset) & !(kernel %in% c("polydot", "tanhdot")) &
-        is.na(order) & !kernel != "besseldot"
+        is.na(C) | type %in% c("C-svc", "C-bsvc", "spoc-svc", "kbb-svc") &
+        is.na(nu) | type == "nu-svc" &
+        is.na(epsilon) | type %in% c("eps-svr", "nu-svr", "eps-bsvm") &
+        is.na(sigma) | kernel %in% c("rbfdot", "anovadot", "besseldot", "laplacedot") &
+        is.na(degree) | kernel %in% c("polydot", "anovadot", "besseldot") &
+        is.na(scale) | kernel %in% c("polydot", "tanhdot") &
+        is.na(offset) | kernel %in% c("polydot", "tanhdot") &
+        is.na(order) | kernel == "besseldot"
       ) 
     ),
     par.vals = list(fit = FALSE),
