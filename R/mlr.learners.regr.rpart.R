@@ -1,5 +1,3 @@
-#' @include Dictionaries.R
-
 mlr.learners$add(LearnerRegr$new(
   name = "rpart",
   package = "rpart",

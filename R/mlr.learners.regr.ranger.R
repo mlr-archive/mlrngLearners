@@ -1,5 +1,3 @@
-#' @include Dictionaries.R
-
 mlr.learners$add(LearnerRegr$new(
   name = "ranger",
   package = "ranger",
@@ -27,17 +25,17 @@ mlr.learners$add(LearnerRegr$new(
   ),
   par.vals = list(num.threads = 1L, verbose = FALSE, respect.unordered.factors = TRUE),
   properties = c("formula", "feat.numeric", "feat.factor", "feat.ordered", "oobpreds", "featimp", "parallel"),
-  
+
   train = function(task, subset, ...) {
     data = getTaskData(task, subset = subset, type = "train", props = self$properties)
     ranger::ranger(formula = task$formula, data = data, ...)
   },
-  
+
   predict = function(model, newdata, ...) {
     p = predict(object = model$rmodel, data = newdata, ...)
     unname(p$predictions)
   },
-  
+
   model.extractors = list(
     OOBPredictions = function(model, task, subset, ...) {
       model$predictions

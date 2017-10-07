@@ -1,5 +1,3 @@
-#' @include Dictionaries.R
-
 mlr.learners$add(LearnerClassif$new(
   name = "xgboost",
   package = "xgboost",
@@ -50,46 +48,46 @@ mlr.learners$add(LearnerClassif$new(
   ),
   par.vals = list(nrounds = 1L, verbose = 0L),
   properties = c("twoclass", "multiclass", "feat.numeric", "prob", "weights", "missings", "featimp"),
-  
+
   train = function(task, subset, weights = NULL, ...) {
     nc = task$nclasses
     parlist = list(...)
-    
+
     if (is.null(parlist$objective))
       parlist$objective = ifelse(nc == 2L, "binary:logistic", "multi:softprob")
-    
+
     if (self$predict.type == "prob" && parlist$objective == "multi:softmax")
       stop("objective = 'multi:softmax' does not work with predict.type = 'prob'")
-    
+
     #if we use softprob or softmax as objective we have to add the number of classes 'num_class'
     if (parlist$objective %in% c("multi:softprob", "multi:softmax"))
       parlist$num_class = nc
-    
+
     data = getTaskData(task, subset = subset, type = "train", target.as = "factor", props = self$properties)
     d = BBmisc::dropNamed(data, drop = task$target)
     truth = task$truth()
     label = match(as.character(truth[[task$target]]), task$classes) - 1
     parlist$data = xgboost::xgb.DMatrix(data = data.matrix(d), label = data.matrix(label))
-    
+
     if (!is.null(weights))
       xgboost::setinfo(parlist$data, "weight", weights)
-    
+
     if (is.null(parlist$watchlist))
       parlist$watchlist = list(train = parlist$data)
-    
+
     do.call(xgboost::xgb.train, parlist)
   },
-  
+
   predict = function(model, newdata, ...) {
     cl = model$task$classes
     nc = model$task$nclasses
     obj = self$par.vals$objective
-    
+
     if (is.null(obj))
       self$par.vals$objective = ifelse(nc == 2L, "binary:logistic", "multi:softprob")
-    
+
     p = predict(model$rmodel, newdata = data.matrix(newdata), ...)
-    
+
     if (nc == 2L) { #binaryclass
       if (self$par.vals$objective == "multi:softprob") {
         y = matrix(p, nrow = length(p) / nc, ncol = nc, byrow = TRUE)
@@ -124,7 +122,7 @@ mlr.learners$add(LearnerClassif$new(
       }
     }
   },
-  
+
   model.extractors = list(
     featureImportance = function(model, task, subset, ...) {
       mod = model$rmodel

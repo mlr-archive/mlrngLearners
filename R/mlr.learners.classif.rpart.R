@@ -1,5 +1,3 @@
-#' @include Dictionaries.R
-
 mlr.learners$add(LearnerClassif$new(
   name = "rpart",
   package = "rpart",
@@ -23,7 +21,7 @@ mlr.learners$add(LearnerClassif$new(
   predict = function(model, newdata, ...) {
     pt = self$predict.type
     if (pt == "response")
-      as.character(predict(model$rmodel, newdata = newdata, type = "class", ...)) 
+      as.character(predict(model$rmodel, newdata = newdata, type = "class", ...))
     else
         predict(model$rmodel, newdata = newdata, type = "prob", ...)
   },
