@@ -10,11 +10,11 @@ mlr.learners$add(LearnerClassif$new(
       ParamFlag$new(id = "replace", default = TRUE),
       ParamReal$new(id = "sample.fraction", lower = 0L, upper = 1L),
       ParamUntyped$new(id = "split.select.weights", lower = 0, upper = 1),
-      ParamFactor$new(id = "splitrule", values = c("gini", "extratrees"), default = "gini"),
+      ParamCategorical$new(id = "splitrule", values = c("gini", "extratrees"), default = "gini"),
       # FIXME: split.select.weights was vector param, untyped correct?
       ParamUntyped$new(id = "always.split.variables"),
       ParamFlag$new(id = "respect.unordered.factors", default = FALSE),
-      ParamFactor$new(id = "importance", values = c("none", "impurity", "permutation"), default = "none"),
+      ParamCategorical$new(id = "importance", values = c("none", "impurity", "permutation"), default = "none"),
       ParamFlag$new(id = "write.forest", default = TRUE),
       ParamFlag$new(id = "scale.permutation.importance", default = FALSE, special.vals = NA),
       ParamInt$new(id = "num.threads", lower = 1L, when = "both"),

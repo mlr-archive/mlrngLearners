@@ -5,9 +5,9 @@ mlr.learners$add(
     par.set = ParamSetFlat$new(
       params = list(
         ParamFlag$new(id = "scaled", default = TRUE),
-        ParamFactor$new(id = "type", default = "C-svc", values = c("C-svc", 
+        ParamCategorical$new(id = "type", default = "C-svc", values = c("C-svc", 
           "nu-svc", "C-bsvc", "spoc-svc", "kbb-svc")),
-        ParamFactor$new(id = "kernel", default = "rbfdot", values = c("vanilladot",
+        ParamCategorical$new(id = "kernel", default = "rbfdot", values = c("vanilladot",
           "polydot", "rbfdot", "tanhdot", "laplacedot", "besseldot", "anovadot", "splinedot")),
         ParamReal$new(id = "C", lower = 0, default = 1, special.vals = NA),
         ParamReal$new(id = "nu", lower = 0, default = 0.2, special.vals = NA),

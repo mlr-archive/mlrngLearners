@@ -6,7 +6,7 @@ mlr.learners$add(LearnerRegr$new(
       # FIXME: Old Comments:
       # we pass all of what goes in 'params' directly to ... of xgboost
       # makeUntypedLearnerParam(id = "params", default = list()),
-      ParamFactor$new(id = "booster", default = "gbtree", values = c("gbtree", "gblinear", "dart")),
+      ParamCategorical$new(id = "booster", default = "gbtree", values = c("gbtree", "gblinear", "dart")),
       ParamUntyped$new(id = "watchlist", default = NULL),
       ParamReal$new(id = "eta", default = 0.3, lower = 0, upper = 1),
       ParamReal$new(id = "gamma", default = 0, lower = 0),
@@ -35,14 +35,14 @@ mlr.learners$add(LearnerRegr$new(
       ParamInt$new(id = "print_every_n", default = 1L, lower = 1L, special.vals = NA),
       ParamInt$new(id = "early_stopping_rounds", default = NULL, lower = 1L, special.vals = list(NULL)),
       ParamFlag$new(id = "maximize", default = NULL, special.vals = list(NULL)),
-      ParamFactor$new(id = "sample_type", default = "uniform", values = c("uniform", "weighted"), special.vals = NA),
-      ParamFactor$new(id = "normalize_type", default = "tree", values = c("tree", "forest"), special.vals = NA),
+      ParamCategorical$new(id = "sample_type", default = "uniform", values = c("uniform", "weighted"), special.vals = NA),
+      ParamCategorical$new(id = "normalize_type", default = "tree", values = c("tree", "forest"), special.vals = NA),
       ParamReal$new(id = "rate_drop", default = 0, lower = 0, upper = 1, special.vals = NA),
       ParamReal$new(id = "skip_drop", default = 0, lower = 0, upper = 1, special.vals = NA),
       # FIXME: Still relevant?? TODO: uncomment the following after the next CRAN update, and set max_depth's lower = 0L
       # ParamFlag$new(id = "one_drop", default = FALSE, special.vals = NA),
-      # ParamFactor$new(id = "tree_method", default = "exact", values = c("exact", "hist"), special.vals = NA),
-      # ParamFactor$new(id = "grow_policy", default = "depthwise", values = c("depthwise", "lossguide"), special.vals = NA),
+      # ParamCategorical$new(id = "tree_method", default = "exact", values = c("exact", "hist"), special.vals = NA),
+      # ParamCategorical$new(id = "grow_policy", default = "depthwise", values = c("depthwise", "lossguide"), special.vals = NA),
       # ParamInt$new(id = "max_leaves", default = 0L, lower = 0L, special.vals = NA),
       # ParamInt$new(id = "max_bin", default = 256L, lower = 2L, special.vals = NA),
       ParamUntyped$new(id = "callbacks", default = list())
