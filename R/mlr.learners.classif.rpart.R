@@ -7,8 +7,8 @@ mlr.learners$add(LearnerClassif$new(
       ParamReal$new(id = "cp", default = 0.01, lower = 0, upper = 1),
       ParamInt$new(id = "maxcompete", default = 4L, lower = 0L),
       ParamInt$new(id = "maxsurrogate", default = 5L, lower = 0L),
-      ParamFactor$new(id = "usesurrogate", default = 2L, values = 0:2),
-      ParamFactor$new(id = "surrogatestyle", default = 0L, values = 0:1),
+      ParamCategorical$new(id = "usesurrogate", default = 2L, values = 0:2),
+      ParamCategorical$new(id = "surrogatestyle", default = 0L, values = 0:1),
       ParamInt$new(id = "maxdepth", default = 30L, lower = 1L, upper = 30L), # we use 30 as upper limit, see docs of rpart.control
       ParamInt$new(id = "xval", default = 10L, lower = 0L)
     )
